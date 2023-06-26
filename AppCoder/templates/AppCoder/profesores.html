@@ -1,0 +1,18 @@
+<div>
+    {% extends "AppCoder/inicio.html" %}
+    {% load static %}
+    
+        {% block contenidoQueCambia %}
+            <p>Profesores</p>
+            <div class="formSetProfesor">
+                {% block setProfesor %}
+                {% endblock %}
+            </div>          
+            <div class="formGetProfesor">
+                {% block getProfesor %}
+                {% endblock %}
+            </div>
+            <a href="{% url 'setProfesor' %}"><button class="btn btn-outline-primary">Crear Profesor</button></a>
+            <a href="{% url 'getProfesor' %}"><button class="btn btn-outline-secondary">Buscar Profesor</button></a> 
+        {% endblock %}
+</div>

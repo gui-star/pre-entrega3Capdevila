@@ -1,0 +1,18 @@
+<div>
+    {% extends "AppCoder/inicio.html" %}
+    {% load static %}
+    
+        {% block contenidoQueCambia %}
+            <p>Entregables</p>
+            <div class="formSetEntregable">
+                {% block setEntregable %}
+                {% endblock %}
+            </div>          
+            <div class="formGetEntregable">
+                {% block getEntregable %}
+                {% endblock %}
+            </div>
+            <a href="{% url 'setEntregable' %}"><button class="btn btn-outline-primary">Hacer Entrega</button></a>
+            <a href="{% url 'getEntregable' %}"><button class="btn btn-outline-secondary">Buscar Entrega</button></a>
+        {% endblock %}
+</div>

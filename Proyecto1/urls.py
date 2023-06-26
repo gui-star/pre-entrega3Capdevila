@@ -18,9 +18,8 @@ from django.urls import path,include
 from Proyecto1.views import saludo, segunda_vista, miNombreEs, probandoTemplate
 
 urlpatterns = [
-    #path('', saludo),
+    path('', saludo),
     path('admin/', admin.site.urls),
-    path('saludo/', saludo),
     path('segunda_vista/', segunda_vista),
     path('miNombreEs/<nombre>', miNombreEs),
     path('probandoTemplate/', probandoTemplate, name='probandoTemplate'),

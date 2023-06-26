@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.template import Template, Context, loader
 
 def saludo(request):
-    return HttpResponse("Hola! puedes ingresar a nuestro sitio aquí http://127.0.0.1:8000/AppCoder/inicio/ ")
+    mensaje = 'Hola! Puedes ingresar a nuestro sitio <a href="http://127.0.0.1:8000/AppCoder/inicio/">aquí</a>.'
+    return HttpResponse(mensaje)
 
 def segunda_vista(request):
     return HttpResponse("<br><br> <h1>Mi primer proyecto con Django</h1>")

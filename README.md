@@ -17,7 +17,7 @@ python manage.py runserver
 
 ## Estructura del proyecto
 
-- La carpeta `Proyecto1` contiene la configuración principal del proyecto, que no será utilizada en esta ocasión puesto que para acceder a sus views, hay que modificar desde settings la ruta en DIR (se probó una manera distinta para llamar al template de allí).
+- La carpeta `Proyecto1` contiene la configuración principal del proyecto, que no será utilizada en esta ocasión.
 - La carpeta `AppCoder` contiene la lógica de la aplicación web.
 - La carpeta `templates` contiene las plantillas HTML utilizadas para las páginas.
 - La carpeta `static` contiene los archivos estáticos como CSS, JavaScript e imágenes.

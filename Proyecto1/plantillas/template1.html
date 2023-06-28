@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Coder</title>
+    <title>Coder</title>
 </head>
 <body>
     <p>Creando el primer template :D</p>
-    <p style="color: red">Mi nombre es: {{ nombre }}</p>
-    <p style="color: green">Mi apellido es: {{ apellido }}</p>
+    <p style="color: rgba(1, 0, 8, 0.11)">Mi nombre es: {{ nombre }}</p>
+    <p style="color: rgb(9, 245, 68)">Mi apellido es: {{ apellido }}</p>
 
-    <div style="background-color: yellow;">
+    <div style="background-color: rgb(0, 247, 255);">
         <p>Lista de estudiantes:</p>
         {% for name in namelist %} 
-            {% if name == "Natalia" %}
-                <p style="color: red">{{ name }}</p>
+            {% if name == "Guillermo" %}
+                <p style="color: green">{{ name }}</p>
             {% else %}
-                <p style="color: green">{{ name }}</p>                
+                <p style="color: blue">{{ name }}</p>                
             {% endif %}
         {% endfor %}
     </div>

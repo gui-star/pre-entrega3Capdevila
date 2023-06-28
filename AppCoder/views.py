@@ -20,7 +20,7 @@ def estudiantes(request):
 
 def entregables(request):
     return render(request, "AppCoder/entregables.html")
-#estudiante
+
 def setEstudiantes(request):
     if request.method == 'POST':
         miFormulario1 = formSetEstudiante(request.POST)
@@ -43,10 +43,10 @@ def buscarEstudiante(request):
         estudiantes = Estudiante.objects.filter(nombre = nombre)
         return render(request, "AppCoder/getEstudiantes.html", {"estudiantes":estudiantes})
     else:
-        respuesta = "No se enviaron datos"
+        respuesta = "No se recibieron los datos"
     
     return HttpResponse(respuesta)
-#profesor
+
 def setProfesores(request):
     if request.method == 'POST':
         miFormulario2 = formSetProfesor(request.POST)
@@ -69,10 +69,10 @@ def buscarProfesor(request):
         profesores = Profesor.objects.filter(nombre = nombre)
         return render(request, "AppCoder/getProfesores.html", {"profesores":profesores})
     else:
-        respuesta = "No se enviaron datos"
+        respuesta = "No se recibieron los datos"
     
     return HttpResponse(respuesta)
-#curso
+
 def setCursos(request):
     if request.method == 'POST':
         miFormulario3 = formSetCurso(request.POST)
@@ -95,10 +95,10 @@ def buscarCurso(request):
         cursos = Curso.objects.filter(nombre = nombre)
         return render(request, "AppCoder/getCursos.html", {"cursos":cursos})
     else:
-        respuesta = "No se enviaron datos"
+        respuesta = "No se recibieron los datos"
     
     return HttpResponse(respuesta)
-#entregables
+
 def setEntregables(request):
     if request.method == 'POST':
         miFormulario4 = formSetEntregable(request.POST)
@@ -121,6 +121,6 @@ def buscarEntregable(request):
         entregables = Entregable.objects.filter(curso = curso)
         return render(request, "AppCoder/getEntregables.html", {"entregables":entregables})
     else:
-        respuesta = "No se enviaron datos"
+        respuesta = "No se recibieron los datos"
     
     return HttpResponse(respuesta)

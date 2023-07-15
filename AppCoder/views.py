@@ -1,12 +1,15 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from AppCoder.models import Estudiante
 from AppCoder.models import Profesor
 from AppCoder.models import Curso
 from AppCoder.models import Entregable
 from AppCoder.forms import *
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.forms import login, logout, authenticate 
+
 
 def inicio(request):
     return render(request, "AppCoder/inicio.html")

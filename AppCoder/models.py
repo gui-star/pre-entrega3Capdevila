@@ -19,4 +19,6 @@ class Curso(models.Model):
 class Entregable(models.Model):
     curso = models.CharField(max_length=40)
     fecha = models.CharField(max_length=40)
-    entregada = models.BooleanField()
+    entregada = models.BooleanField
+
+    

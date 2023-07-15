@@ -19,4 +19,10 @@ urlpatterns = [
     path('setEntregable/', setEntregables, name="setEntregable"),
     path('getEntregable/', getEntregables, name="getEntregable"),
     path('buscarEntregable/', buscarEntregable, name="buscarEntregable"),
+    path('login/', loginWeb, name="login"),
+    path('registro/', registro, name="registro"),
+    path('Logout/',LogoutView.as_view(template_name = 'AppCoder/login.html'), name="Logout"),
+    path('perfil/', perfilview, name="perfil"),
+    path('Perfil/editarPerfil/', editarPerfil, name="editarPerfil"),
+    path('Perfil/changePassword/', changePassword, name="changePassword"),
 ]

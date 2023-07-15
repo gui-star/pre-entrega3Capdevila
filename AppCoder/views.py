@@ -5,6 +5,8 @@ from AppCoder.models import Profesor
 from AppCoder.models import Curso
 from AppCoder.models import Entregable
 from AppCoder.forms import *
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import login, logout, authenticate 
 
 def inicio(request):
     return render(request, "AppCoder/inicio.html")
@@ -124,3 +126,59 @@ def buscarEntregable(request):
         respuesta = "No se recibieron los datos"
     
     return HttpResponse(respuesta)
+
+def loginWeb(request):
+    if request.method == "POST":
+        user = authenticate(username = request.POST['user'], password = request.POST['password'])
+        if user is not None:
+            login(request, user)
+            return redirect("../inicio")
+        else:
+            return render(request, 'AppCoder/login.html', {'error': 'Usuario o contraseña incorrectos'})
+    else:
+        return render(request, 'AppCoder/login.html')
+
+def registro(request):
+    if request.method == "POST":
+        userCreate = UserCreationForm(request.POST)
+        if userCreate is not None:
+            userCreate.save()
+            return render(request, 'AppCoder/login.html')
+    else:
+        return render(request, 'AppCoder/registro.html')
+
+@login_required  
+def perfilview(request):
+    return render(request, 'AppCoder/Perfil/Perfil.html')
+
+@login_required  
+def editarPerfil(request):
+    usuario = request.user
+    user_basic_info = User.objects.get(id = usuario.id)
+    if request.method == "POST":
+        form = UserEditForm(request.POST, instance = usuario)
+        if form.is_valid():
+            user_basic_info.username = form.cleaned_data.get('username')
+            user_basic_info.email = form.cleaned_data.get('email')
+            user_basic_info.first_name = form.cleaned_data.get('first_name')
+            user_basic_info.last_name = form.cleaned_data.get('last_name')
+            user_basic_info.save()
+            return render(request, 'AppCoder/Perfil/Perfil.html')
+    else:
+        form = UserEditForm(initial= {'username': usuario.username, 'email': usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name })
+        return render(request, 'AppCoder/Perfil/editarPerfil.html', {"form": form})
+
+@login_required
+def changePassword(request):
+    usuario = request.user    
+    if request.method == "POST":
+        form = ChangePasswordForm(data = request.POST, user = usuario)
+        if form.is_valid():
+            if request.POST['new_password1'] == request.POST['new_password2']:
+                user = form.save()
+                update_session_auth_hash(request, user)
+            return HttpResponse("Las constraseñas no coinciden")
+        return render(request, "AppCoder/inicio.html")
+    else:
+        form = ChangePasswordForm(user = usuario)
+        return render(request, 'AppCoder/Perfil/changePassword.html', {"form": form})

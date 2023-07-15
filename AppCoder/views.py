@@ -144,11 +144,13 @@ def loginWeb(request):
 def registro(request):
     if request.method == "POST":
         userCreate = UserCreationForm(request.POST)
-        if userCreate is not None:
-            userCreate.save()
+        if userCreate.is_valid():
+            user = userCreate.save(commit=False)  # Guardar el formulario sin realizar validaciones
+            user.save()  # Guardar el objeto de usuario
             return render(request, 'AppCoder/login.html')
     else:
-        return render(request, 'AppCoder/registro.html')
+        userCreate = UserCreationForm()
+    return render(request, 'AppCoder/registro.html', {'form': userCreate})
 
 @login_required  
 def perfilview(request):
@@ -185,3 +187,6 @@ def changePassword(request):
     else:
         form = ChangePasswordForm(user = usuario)
         return render(request, 'AppCoder/Perfil/changePassword.html', {"form": form})
+    
+def AcercaDeMi(request):
+    return render(request, 'AppCoder/AcercaDeMi.html')    

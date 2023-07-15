@@ -28,17 +28,18 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'Entregables' %}">Entregables</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'Estudiantes' %}">Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'Profesores' %}">Profesores</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="{% url 'AcercaDeMi' %}">Sobre mi</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
-        <h1 class="titulo">Welcome to the gaming house</h1>
+        <h1 class="titulo">Gaming School</h1>
     </header>
     <main>
         <div class="imagenContainer">
             <div class="imagen"></div>
         </div>
-        <h2> ֍ The amazing gambling house! ֍ </h2>
+        <h2> The best gaming school  </h2>
         <div class="contenido">
             {% block contenidoQueCambia %}
             {% endblock %}
@@ -71,6 +72,8 @@
                 <li>
                     <a href="{% url 'Estudiantes' %}">Estudiantes</a>
                 </li>
+                <li><a href="{% url 'AcercaDeMi' %}">Sobre mi</a>
+                </li> 
                 </ul>
             </div>
             <div  class="col-lg-3 col-md-6 mb-md-0">

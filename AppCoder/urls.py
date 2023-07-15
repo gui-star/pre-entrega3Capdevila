@@ -26,4 +26,5 @@ urlpatterns = [
     path('perfil/', perfilview, name="perfil"),
     path('Perfil/editarPerfil/', editarPerfil, name="editarPerfil"),
     path('Perfil/changePassword/', changePassword, name="changePassword"),
+    path('AcercaDeMi/', AcercaDeMi, name="AcercaDeMi"),
 ]

@@ -19,3 +19,7 @@ class formSetEntregable (forms.Form):
     curso = forms.CharField(max_length=40)
     fecha = forms.CharField(max_length=40)
     entregada = forms.BooleanField()
+
+
+class AvatarForm(forms.Form):
+    avatar = forms.ImageField()    

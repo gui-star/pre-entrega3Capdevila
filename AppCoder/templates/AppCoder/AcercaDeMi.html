@@ -1,7 +1,8 @@
-{% extends 'AppCoder/inicio.html' %} 
-
-{% block content %}
-
-<h1>Guille</h1>
-
-{% endblock content %}
+<div>
+    {% extends "AppCoder/inicio.html" %}
+    {% load static %}
+      {% block contenidoQueCambia %}
+        <h1>Acerca de mi</h1>
+        <p> "Bienvenidos a nuestra página web. Somos un apasionado equipo de profesionales de la industria del gaming. Nuestro objetivo es ofrecer una educación integral y práctica a los jugadores apasionados. Nuestra escuela de gaming está diseñada para nutrir el talento y convertir la pasión por los videojuegos en una carrera exitosa. Contamos con un equipo diverso y talentoso de creadores con experiencia en diferentes áreas del gaming. Queremos crear una comunidad colaborativa donde los estudiantes compartan ideas y colaboren en proyectos emocionantes. Explora nuestra página web para obtener más información y únete a nosotros en este viaje hacia una carrera en la industria del gaming"</p>
+    {% endblock %}
+  </div>

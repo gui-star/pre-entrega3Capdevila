@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from AppCoder.models import Estudiante
 from AppCoder.models import Profesor
 from AppCoder.models import Curso
 from AppCoder.models import Entregable
@@ -9,7 +8,9 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
+from AppCoder.forms import formSetEstudiante
+from AppCoder.forms import AvatarForm
+from AppCoder.models import Estudiante, Avatar
 
 def inicio(request):
     return render(request, "AppCoder/inicio.html")
@@ -26,11 +27,14 @@ def estudiantes(request):
 def entregables(request):
     return render(request, "AppCoder/entregables.html")
 
+def AcercaDeMi(request):
+    return render(request, 'AppCoder/AcercaDeMi.html')  
+
 def setEstudiantes(request):
     if request.method == 'POST':
         miFormulario1 = formSetEstudiante(request.POST)
         print(miFormulario1)
-        if miFormulario1.is_valid:
+        if miFormulario1.is_valid():
             data = miFormulario1.cleaned_data
             estudiante = Estudiante(nombre=data["nombre"],apellido=data["apellido"], email=data["email"])    
             estudiante.save()
@@ -145,8 +149,8 @@ def registro(request):
     if request.method == "POST":
         userCreate = UserCreationForm(request.POST)
         if userCreate.is_valid():
-            user = userCreate.save(commit=False)  # Guardar el formulario sin realizar validaciones
-            user.save()  # Guardar el objeto de usuario
+            user = userCreate.save(commit=False) 
+            user.save()  
             return render(request, 'AppCoder/login.html')
     else:
         userCreate = UserCreationForm()
@@ -182,11 +186,42 @@ def changePassword(request):
             if request.POST['new_password1'] == request.POST['new_password2']:
                 user = form.save()
                 update_session_auth_hash(request, user)
-            return HttpResponse("Las constraseñas no coinciden")
+            else:
+                return HttpResponse("Las constraseñas no coinciden")
         return render(request, "AppCoder/inicio.html")
     else:
         form = ChangePasswordForm(user = usuario)
         return render(request, 'AppCoder/Perfil/changePassword.html', {"form": form})
     
-def AcercaDeMi(request):
-    return render(request, 'AppCoder/AcercaDeMi.html')    
+def editAvatar(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES)
+        print(form)
+        print(form.is_valid())
+        if form.is_valid():
+            user = User.objects.get(username = request.user)
+            avatar = Avatar(user = user, image = form.cleaned_data['avatar'], id = request.user.id)
+            avatar.save()
+            avatar = Avatar.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None           
+            return render(request, "AppCoder/inicio.html", {'avatar': avatar})
+    else:
+        try:
+            avatar = Avatar.objects.filter(user = request.user.id)
+            form = AvatarForm()
+        except:
+            form = AvatarForm()
+    return render(request, "AppCoder/Perfil/avatar.html", {'form': form})
+
+def getavatar(request):
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return avatar    
+
+  
